@@ -1,4 +1,5 @@
 DROP DATABASE IF EXISTS minion_db;
+
 CREATE DATABASE minion_db;
 
 USE minion_db;
