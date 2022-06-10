@@ -9,3 +9,5 @@ It allows you to display and view employees while also being able to add additio
 As mentioned above, this was made with and requires Node.js, Inquirer and MySql and MySql2. 
 
 ## Video Walkthrough
+
+https://drive.google.com/file/d/1LJqy8D2GbNCksw60__AFYvdduzhsgmdT/view
