@@ -1,16 +1,14 @@
-const mysql12 = require('mysql2')
+const mysql2 = require('mysql2')
 const inquirer = require('inquirer')
 require("console.table")
 
-// connecting to the minions_db
-const db = mysql.createConnection(
-    {
-        host: 'localhost',
-        user: 'root',
-        password: process.env.DB_PASSWORD,
-        database: 'minions_db'
-    },
-);
+// connecting to the minion_db
+const db = mysql2.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: process.env.DB_PASSWORD,
+    database: 'minion_db',
+});
 
 db.connect(() => {
     console.log("successfully connected to database")
@@ -40,13 +38,13 @@ function selectPrompt() {
                     addEmployee();
                     break
                 case "View Departments":
-                    viewDepartment();
+                    viewDepartments();
                     break
                 case "View Roles":
-                    viewRole();
+                    viewRoles();
                     break
                 case "View Employees":
-                    viewEmployee();
+                    viewEmployees();
                     break;
                 default:
                     db.end();
@@ -57,31 +55,31 @@ function selectPrompt() {
 
 // creating functions for every prompt option given above
 
-function viewDepartment() {
+function viewDepartments() {
     db.query('SELECT * FROM departments;',
-    function (err, response) {
-        if (err) throw err;
-        console.table(response)
-        selectPrompt()
-    })
+        function (err, response) {
+            if (err) throw err;
+            console.table(response);
+            selectPrompt()
+        })
 }
 
-function viewRole() {
+function viewRoles() {
     db.query('SELECT * FROM roles;',
-    function (err, response) {
-        if (err) throw err;
-        console.table(response)
-        selectPrompt()
-    })
+        function (err, response) {
+            if (err) throw err;
+            console.table(response);
+            selectPrompt()
+        })
 }
 
-function viewEmployee() {
+function viewEmployees() {
     db.query('SELECT * FROM employees;',
-    function (err, response) {
-        if (err) throw err;
-        console.table(response)
-        selectPrompt()
-    })
+        function (err, response) {
+            if (err) throw err;
+            console.table(response);
+            selectPrompt()
+        })
 }
 
 function addDepartment() {
@@ -92,7 +90,7 @@ function addDepartment() {
     }]).then(({ departmentName }) => {
         db.query('INSERT INTO departments (department_name) VALUES(?);', departmentName, function (err, response) {
             if (err) throw err;
-            console.table(response)
+            console.table(response);
             selectPrompt()
         })
     })
@@ -118,7 +116,7 @@ function addRole() {
         const values = [response.roleTitle, response.roleSalary, response.roleDepartmentID]
         db.query(sql, [values], function (err, response) {
             if (err) throw err;
-            console.table(response)
+            console.table(response);
             selectPrompt()
         })
     })
@@ -149,7 +147,7 @@ function addEmployee() {
         const values = [response.firstName, response.lastName, response.roleID, response.managerID]
         db.query(sql, [values], function (err, response) {
             if (err) throw err;
-            console.table(response)
+            console.table(response);
             selectPrompt()
         })
     })

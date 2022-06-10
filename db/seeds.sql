@@ -1,10 +1,10 @@
-USE minions_db
+USE minion_db
 
 INSERT INTO departments (department_name)
 VALUES
-    ("R & D")
-    ("Accounting")
-    ("Production")
+    ("R & D"),
+    ("Accounting"),
+    ("Production");
 
 INSERT INTO roles (title, salary, department_id)
 VALUES
